@@ -1,0 +1,21 @@
+<!-- Created by: Edmond Wang -->
+<!-- name: strings.xml -->
+<resources>
+    <string name="app_name">TempConversionHW3</string>
+    <string name="frontHeader">Converter Program</string>
+    <string name="headerLabel">Temperature Conversion</string>
+    <string name="celsiusToFahrenheit">Celsius to
+        Fahrenheit</string>
+    <string name="fahrenheitToCelsius">Fahrenheit to
+        Celsius</string>
+    <string name="convertLabel">Convert</string>
+    <string name="hint">Enter temperature</string>
+    <string name="cToFPrompt">Type temp in Celsius</string>
+    <string name="fToCPrompt">Type temp in Fahrenheit</string>
+    <string name="inCelsius">\u0020 in Celsius\u0020</string>
+    <string name="inFahrenheit">\u0020 in Fahrenheit\u0020</string>
+    <string name="is">is\u0020</string>
+    <string name="password">Password: </string>
+    <string name="submit">Submit</string>
+    <string name="realPassword">pass</string>
+</resources>

@@ -1,0 +1,9 @@
+<!-- created by: Edmond Wang  -->
+<!-- name: strings.xml -->
+<resources>
+    <string name="app_name">Homework1</string>
+    <string name="class_name">CS211D</string>
+    <string name="semester">Fall 2016 Semester</string>
+    <string name="my_name">Edmond Wang</string>
+    <string name="assignment">Homework #1</string>
+</resources>

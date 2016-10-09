@@ -1,0 +1,10 @@
+<!--created by: Edmond Wang -->
+<!-- name: strings.xml -->
+<resources>
+    <string name="app_name">TimeButtons_HW2</string>
+    <string name="header_name">Date \u0026 Time</string>
+    <string name="timeButtonName">Time</string>
+    <string name="dateButtonName">Date</string>
+    <string name="timeLabel">Time is: </string>
+    <string name="dateLabel">Date is: </string>
+</resources>

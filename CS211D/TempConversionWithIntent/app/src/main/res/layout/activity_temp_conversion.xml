@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created by: Edmond Wang -->
+<!-- Name: activity_temp_conversion.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.edmondwang.tempconversionwithintent.TempConversionActivity">
+
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/headerLabel"
+        android:textSize="28sp"
+        android:textColor="@color/white"
+        android:gravity= "center"
+        android:background="@color/colorAccent"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="16dp"
+        android:orientation="vertical"
+        android:checkedButton="@+id/cToF">
+        <RadioButton
+            android:id="@+id/cToF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/celsiusToFahrenheit"
+            android:textSize="20sp"
+            android:onClick="buttonHandler"
+            android:layout_gravity="center"/>
+        <RadioButton
+            android:id="@+id/fToC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fahrenheitToCelsius"
+            android:textSize="20sp"
+            android:onClick="buttonHandler"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+    </RadioGroup>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/temp"
+            android:text=""/>
+        <EditText
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:hint="@string/hint"
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLength="15"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/convertButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/convertLabel"
+        android:onClick="convertTemp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/outputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text=""
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
