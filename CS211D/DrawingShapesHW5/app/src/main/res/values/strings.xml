@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DrawingShapesHW5</string>
+    <string name="header">Draw Shapes</string>
+    <string name="circle">Draw Circle</string>
+    <string name="triangle">Draw Triangle</string>
+    <string name="rectangle">Draw Rectangle</string>
+    <string name="start">START</string>
+</resources>
