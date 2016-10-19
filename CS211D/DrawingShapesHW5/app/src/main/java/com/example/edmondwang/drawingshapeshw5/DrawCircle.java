@@ -31,7 +31,7 @@ public class DrawCircle extends View
                     .nextInt(256), rand.nextInt(256));
             //set max to w since width is usually the smaller of
             // the 2
-            radius = rand.nextInt(w);
+            radius = rand.nextInt(w/2);
             //between radius and w - radius
             x = rand.nextInt(w-2*radius ) + radius;
             y = rand.nextInt(h-2*radius) + radius;
@@ -47,6 +47,7 @@ public class DrawCircle extends View
     public DrawCircle(Context con, AttributeSet attr)
     {
         super(con, attr);
+        p = new Paint();
         WindowManager wm = (WindowManager) con.getSystemService
                 (Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -55,6 +56,7 @@ public class DrawCircle extends View
         screenWidth = point.x;
         screenHeight = point.y;
         rand = new Random();
+        circleArrayList = new ArrayList<Circle>();
     }
 
     @Override
@@ -63,6 +65,13 @@ public class DrawCircle extends View
         super.onDraw(c);
 
         //loop through array list and draw the circles
+        for(int i = 0; i < circleArrayList.size(); ++i)
+        {
+            Circle aCircle = circleArrayList.get(i);
+            p.setColor(aCircle.color);
+            p.setStyle(Paint.Style.FILL);
+            c.drawCircle(aCircle.x, aCircle.y, aCircle.radius, p);
+        }
     }
 
     public void generateCircle()

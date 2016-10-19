@@ -28,7 +28,11 @@ public class DrawingActivity extends AppCompatActivity
         {
             //circle
             case 1:
-                setContentView(new DrawCircle(this, null));
+                DrawCircle view = new DrawCircle(this, null);
+                view.generateCircle();
+                view.generateCircle();
+                view.generateCircle();
+                setContentView(view);
                 break;
             case 2:
                 break;
