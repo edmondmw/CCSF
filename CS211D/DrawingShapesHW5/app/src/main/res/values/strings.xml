@@ -5,4 +5,6 @@
     <string name="triangle">Draw Triangle</string>
     <string name="rectangle">Draw Rectangle</string>
     <string name="start">START</string>
+    <string name="draw">DRAW</string>
+    <string name="clear">CLEAR</string>
 </resources>

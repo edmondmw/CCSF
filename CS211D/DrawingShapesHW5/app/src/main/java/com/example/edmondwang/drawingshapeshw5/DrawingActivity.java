@@ -2,6 +2,7 @@ package com.example.edmondwang.drawingshapeshw5;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import org.w3c.dom.Text;
 public class DrawingActivity extends AppCompatActivity
 {
     int selection;
+    DrawView drawView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -23,25 +25,8 @@ public class DrawingActivity extends AppCompatActivity
                     "shape!", Toast.LENGTH_SHORT).show();
             finish();
         }
-
-        switch(selection)
-        {
-            //circle
-            case 1:
-                DrawCircle view = new DrawCircle(this, null);
-                view.generateCircle();
-                view.generateCircle();
-                view.generateCircle();
-                setContentView(view);
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            default:
-                break;
-
-        }
+        drawView = (DrawView)findViewById(R.id.drawView);
+        drawView.setSelection(selection);
     }
 
     //*****************drawHandler()******************************
@@ -51,17 +36,22 @@ public class DrawingActivity extends AppCompatActivity
         {
             case 1:
                 //call drawCircle;
+                drawView.generateCircle();
                 break;
             case 2:
-                //call draw tri
+                drawView.generateTriangle();
                 break;
             case 3:
-                //call drawRect
+                drawView.generateRectangle();
                 break;
             default:
                 break;
         }
     }
-
+    //****************clearScreen()*******************************
+    public void clearScreen(View v)
+    {
+        drawView.clearScreen();
+    }
 
 }
