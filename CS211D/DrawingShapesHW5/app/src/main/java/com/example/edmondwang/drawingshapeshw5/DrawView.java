@@ -5,12 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,6 +30,7 @@ public class DrawView extends View
         super(con, attr);
         p = new Paint();
         p.setStyle(Paint.Style.FILL);
+        //How to get screen size. Kept for future reference
 //        WindowManager wm = (WindowManager) con.getSystemService
 //                (Context.WINDOW_SERVICE);
 //        Display display = wm.getDefaultDisplay();

@@ -1,3 +1,5 @@
+<!-- Created by: Edmond Wang -->
+<!-- name: strings.xml -->
 <resources>
     <string name="app_name">DrawingShapesHW5</string>
     <string name="header">Draw Shapes</string>

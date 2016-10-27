@@ -1,9 +1,17 @@
+/* Author: Edmond Wang
+ * Homework Assignment: 5
+ * Date: 10/24/16
+ * Select which shape you want to draw then get sent to the
+ * next screen which allows you to draw as many of the
+ * specified shape as you want.
+ */
 package com.example.edmondwang.drawingshapeshw5;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class SelectionActivity extends AppCompatActivity
 {
@@ -30,6 +38,7 @@ public class SelectionActivity extends AppCompatActivity
                 selection = 3;
                 break;
             default:
+                selection = 0;
                 break;
         }
     }
@@ -43,6 +52,11 @@ public class SelectionActivity extends AppCompatActivity
                     DrawingActivity.class);
             i.putExtra("selection", selection);
             startActivity(i);
+        }
+        else
+        {
+            Toast.makeText(getApplication().getBaseContext(),
+                    "Choose a shape!", Toast.LENGTH_SHORT).show();
         }
     }
 }
