@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StatesGame</string>
+    <string name="title">States</string>
+    <string name="name_hint">Enter Name</string>
+    <string name="play_button">Play Game</string>
+    <string name="score_button">Scores</string>
+    <string name="score">Score</string>
+    <string name="name">Name</string>
+</resources>

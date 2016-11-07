@@ -1,3 +1,10 @@
+<!-- Created by: Edmond Wang  -->
+<!-- Name: strings.xml -->
 <resources>
     <string name="app_name">States</string>
+    <string name="title">States and Capitals</string>
+    <string name="hint">Enter a capital city or a state</string>
+    <string name="submit">Submit</string>
+    <string name="outText">is the capital of</string>
+    <string name="error">No capital/state with that name</string>
 </resources>
