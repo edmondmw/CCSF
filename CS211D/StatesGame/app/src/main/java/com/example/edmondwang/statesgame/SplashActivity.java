@@ -1,3 +1,12 @@
+/* Author: Edmond Wang
+ * Homework Assignment: 7
+ * Date: 11/14/16
+ * A game in which we answer questions regarding whether a
+ * given location is a state or a capital. If correct, we are
+ * then told to specify its corresponding capital or state,
+ * respectively. Scores and names are then recorded, and the
+ * top 10 are displayed at the end.
+ */
 package com.example.edmondwang.statesgame;
 
 import android.Manifest;
@@ -15,7 +24,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,7 +32,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 import java.util.Scanner;
 
 public class SplashActivity extends AppCompatActivity
@@ -33,7 +40,7 @@ public class SplashActivity extends AppCompatActivity
     SQLiteDatabase db;
     private static final String TAG = SplashActivity.class
             .getName();
-    int[] randomID;
+    String[][] stateCapitals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,37 +70,32 @@ public class SplashActivity extends AppCompatActivity
         printDatabase();
         enterSetup();
     }
-    //*****************playHandler()******************************
-    public void playHandler(View v)
+    //********************enterSetup()****************************
+    void enterSetup()
     {
-        initializeRandomArray();
-        if(et.getVisibility()== View.INVISIBLE)
+        et.setOnKeyListener(new View.OnKeyListener()
         {
-            et.setVisibility(View.VISIBLE);
-        } else
-        {
-            if (et.getText().length() > 0)
+            public boolean onKey(View v, int keyCode, KeyEvent
+                    ke)
             {
-                String name = et.getText().toString();
-                Intent i = new Intent(
-                        getApplicationContext(),
-                        GameActivity.class);
-                i.putExtra("randoms", randomID);
-                i.putExtra("name", name);
-                startActivity(i);
-            } else
-            {
-                Toast.makeText(getBaseContext(),
-                        "Enter a name!",
-                        Toast.LENGTH_SHORT).show();
+                //When we hit enter, go to next activity
+                if ((ke.getAction() == KeyEvent.ACTION_DOWN)
+                        &&(keyCode == KeyEvent.KEYCODE_ENTER))
+                {
+                    goToGameActivity();
+                    return(true);
+                }
+                return(false);
             }
-        }
+        });
     }
 
     //****************initializeRandomArray()*********************
     void initializeRandomArray()
     {
-        randomID = new int[5];
+        stateCapitals = new String[5][2];
+        //Get 5 random ids
+        String[] randomID = new String[5];
         Integer[] array = new Integer[50];
         for (int i = 0; i < 50; i++)
         {
@@ -102,8 +104,44 @@ public class SplashActivity extends AppCompatActivity
         Collections.shuffle(Arrays.asList(array));
         for(int i = 0; i < 5; i++)
         {
-            randomID[i] = array[i];
+            randomID[i] = String.valueOf(array[i]);
             Log.i(TAG, String.valueOf(randomID[i]));
+        }
+
+        //get the states and capitals using the random ids
+        String selectQuery = "select state,capital from states " +
+                "where id in (?,?,?,?,?)";
+        Cursor c = db.rawQuery(selectQuery, randomID);
+        int j = 0;
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext(),
+                j++)
+        {
+            stateCapitals[j][0] = c.getString(0);
+            stateCapitals[j][1] = c.getString(1);
+            Log.i(TAG, stateCapitals[j][0] + " " +
+                    stateCapitals[j][1]);
+        }
+    }
+    //********************goToGameActivity()**********************
+    void goToGameActivity()
+    {
+        initializeRandomArray();
+        if (et.getText().length() > 0)
+        {
+            String name = et.getText().toString();
+            Intent i = new Intent(
+                    getApplicationContext(),
+                    GameActivity.class);
+            i.putExtra("name", name);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("randoms", stateCapitals);
+            i.putExtras(bundle);
+            startActivity(i);
+        } else
+        {
+            Toast.makeText(getBaseContext(),
+                    "Enter a name!",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -128,19 +166,21 @@ public class SplashActivity extends AppCompatActivity
 
             Scanner scanner = new Scanner(fis);
             String line;
-            scanner.nextLine();
-            scanner.nextLine();
             ContentValues cv = new ContentValues();
             while(scanner.hasNextLine())
             {
                 line = scanner.nextLine();
-                String[] split = line.split("\\s\\s+");
-                //insert into db
-                cv.put("state", split[0]);
-                cv.put("capital",split[1]);
-                if(db.insertOrThrow("states", null,cv) < 0)
+                String sub = line.substring(0,5);
+                if(!(sub.equals("-----") || sub.equals("State")))
                 {
-                    Log.i(TAG,"error on insert");
+                    String[] split = line.split("\\s\\s+");
+                    //insert into db
+                    cv.put("state", split[0]);
+                    cv.put("capital", split[1]);
+                    if (db.insertOrThrow("states", null, cv) < 0)
+                    {
+                        Log.i(TAG, "error on insert");
+                    }
                 }
             }
         } catch (IOException e)
@@ -148,6 +188,56 @@ public class SplashActivity extends AppCompatActivity
             e.printStackTrace();
             Toast.makeText(getBaseContext(), "File not found",
                     Toast.LENGTH_SHORT).show();
+        }
+    }
+    //********************checkTableExists()**********************
+    boolean checkTableExists()
+    {
+        Cursor cursor = db.rawQuery("select count (*) from " +
+                        "sqlite_master where type = ? and name " +
+                "= ?", new String[] {"table", "states"});
+        if (!cursor.moveToFirst())
+        {
+            cursor.close();
+            return false;
+        }
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count > 0;
+    }
+
+    //******************printDatabase()***************************
+    void printDatabase()
+    {
+        Cursor c = db.rawQuery("select * from states;",null);
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
+        {
+            String result ="|";
+            for(int i = 0; i < c.getColumnCount(); i++)
+            {
+                result += c.getString(i) + "|";
+            }
+            Log.i(TAG,"ROW " + c.getPosition()+": " + result);
+        }
+        Log.i(TAG,"***CursorEnd***");
+    }
+    //*****************scoreHandler()*****************************
+    public void scoreHandler(View v)
+    {
+        Intent i = new Intent(getApplicationContext(),
+                ScoreActivity.class);
+        startActivity(i);
+    }
+
+    //*****************playHandler()******************************
+    public void playHandler(View v)
+    {
+        if(et.getVisibility()== View.INVISIBLE)
+        {
+            et.setVisibility(View.VISIBLE);
+        } else
+        {
+            goToGameActivity();
         }
     }
 
@@ -195,71 +285,5 @@ public class SplashActivity extends AppCompatActivity
         if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
             loadDB();
         }
-    }
-
-    //********************checkTableExists()**********************
-    boolean checkTableExists()
-    {
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " +
-                "sqlite_master WHERE type = ? AND name = ?",
-                new String[] {"table", "states"});
-        if (!cursor.moveToFirst())
-        {
-            cursor.close();
-            return false;
-        }
-        int count = cursor.getInt(0);
-        cursor.close();
-        return count > 0;
-    }
-
-    //******************printDatabase()***************************
-    void printDatabase()
-    {
-        Cursor c = db.rawQuery("select * from states;",null);
-        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-        {
-            String result ="|";
-            for(int i = 0; i < c.getColumnCount(); i++)
-            {
-                result += c.getString(i) + "|";
-            }
-            Log.i(TAG,"ROW " + c.getPosition()+": " + result);
-        }
-        Log.i(TAG,"***CursorEnd***");
-        //TODO: add scores table into here
-    }
-
-    void enterSetup()
-    {
-        et.setOnKeyListener(new View.OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent
-                    ke)
-            {
-                //When we hit enter, go to next activity
-                if ((ke.getAction() == KeyEvent.ACTION_DOWN)
-                        &&(keyCode == KeyEvent.KEYCODE_ENTER))
-                {
-                    if (et.getText().length() > 0)
-                    {
-                        String name = et.getText().toString();
-                        Intent i = new Intent(
-                                getApplicationContext(),
-                                GameActivity.class);
-                        i.putExtra("randoms", randomID);
-                        i.putExtra("name", name);
-                        startActivity(i);
-                    } else
-                    {
-                        Toast.makeText(getBaseContext(),
-                                "Enter a name!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    return(true);
-                }
-                return(false);
-            }
-        });
     }
 }

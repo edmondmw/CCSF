@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Created by: Edmond Wang -->
+<!-- name: activity_game.xml -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -35,58 +37,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/nameTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="135dp"/>
+        android:id="@+id/questionTextView"
+        android:textSize="20sp"
+        android:layout_marginBottom="43dp"
+        android:layout_above="@+id/radioGroup"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/answerEditText"
+        android:layout_alignTop="@+id/radioGroup"
+        android:layout_alignEnd="@+id/submitButton"
+        android:layout_toEndOf="@+id/nameTextView"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:id="@+id/radioGroup">
+        android:id="@+id/radioGroup"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/submitButton">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/state"
+            android:id="@+id/radioButton"
+            android:layout_below="@+id/questionTextView"
+            android:layout_centerHorizontal="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/capital"
+            android:id="@+id/radioButton2"
+            android:layout_below="@+id/radioButton"
+            android:layout_alignEnd="@+id/questionTextView"/>
     </RadioGroup>
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New RadioButton"
-        android:id="@+id/radioButton"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"/>
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New RadioButton"
-        android:id="@+id/radioButton2"
-        android:layout_below="@+id/radioButton"
-        android:layout_centerHorizontal="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_marginBottom="73dp"
+        android:text="@string/submit_button"
+        android:id="@+id/submitButton"
+        android:layout_marginBottom="101dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="submitHandler"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView3"
-        android:layout_above="@+id/button"
-        android:layout_alignStart="@+id/radioGroup"
-        android:layout_marginBottom="45dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3"/>
 </RelativeLayout>

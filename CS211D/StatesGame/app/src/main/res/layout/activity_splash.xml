@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Created by: Edmond Wang -->
+<!-- name: activity_splash.xml -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -35,7 +37,8 @@
         android:id="@+id/scoresButton"
         android:layout_alignTop="@+id/playButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"/>
+        android:layout_marginTop="46dp"
+        android:onClick="scoreHandler"/>
 
     <TextView
         android:layout_width="match_parent"

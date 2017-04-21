@@ -1,0 +1,6 @@
+<!-- Created by: Edmond Wang -->
+<!-- Name: strings.xml -->
+<resources>
+    <string name="app_name">WebBrowser</string>
+    <string name="go_btn_title">GO</string>
+</resources>

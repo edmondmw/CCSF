@@ -1,0 +1,6 @@
+<!-- Created by: Edmond Wang -->
+<!-- Name: activity_messaging.xml -->
+<resources>
+    <string name="app_name">MessageApp</string>
+    <string name="send">Send</string>
+</resources>

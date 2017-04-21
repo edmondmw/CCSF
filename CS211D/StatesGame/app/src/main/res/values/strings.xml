@@ -1,9 +1,21 @@
+<!-- Created by: Edmond Wang -->
+<!-- name: strings.xml -->
 <resources>
     <string name="app_name">StatesGame</string>
     <string name="title">States</string>
     <string name="name_hint">Enter Name</string>
     <string name="play_button">Play Game</string>
     <string name="score_button">Scores</string>
-    <string name="score">Score</string>
-    <string name="name">Name</string>
+    <string name="submit_button">Submit</string>
+    <string name="score">Score\n%s</string>
+    <string name="name">Name\n%s</string>
+    <string name="state">State</string>
+    <string name="capital">Capital</string>
+    <string name="capital_or_state">Is %s a state or a
+        capital?</string>
+    <string name="capital_question">What is the capital
+        of %s?</string>
+    <string name="state_question">What state is %s in?</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="back">Go Back</string>
 </resources>

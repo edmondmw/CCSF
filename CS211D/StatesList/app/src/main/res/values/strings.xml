@@ -1,0 +1,6 @@
+<!-- Created by: Edmond Wang -->
+<!-- name: strings.xml -->
+<resources>
+    <string name="app_name">StatesList</string>
+    <string name="capital">Capital</string>
+</resources>

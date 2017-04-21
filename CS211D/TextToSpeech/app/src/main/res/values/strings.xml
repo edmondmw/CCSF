@@ -1,0 +1,11 @@
+<!-- Created by: Edmond Wang -->
+<!-- Name: strings.xml -->
+<resources>
+    <string name="app_name">TextToSpeech</string>
+    <string name="name_label">Name</string>
+    <string name="language_label">Language</string>
+    <string name="pitch_label">Pitch</string>
+    <string name="voice_label">Voice</string>
+    <string name="start_label">Start</string>
+    <string name="stop_label">Stop</string>
+</resources>
